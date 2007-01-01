@@ -3,12 +3,8 @@
 
 = Introduction =
 
-Add your content here.
+Project is the very beginning, no usefull staff still here.
 
+= Contents =
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * [Links]
