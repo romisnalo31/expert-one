@@ -3,7 +3,7 @@
 
 :-op(900,xfy, :).
 
-main :-
+mymain :-
 	greeting,
 	repeat,
 	write('> '),
