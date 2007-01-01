@@ -1,0 +1,8 @@
+#summary Usefull Links and references
+
+= Prolog Links =
+
+  * [http://www.swi-prolog.org SWI Prolog]
+  * [http://roots.iai.uni-bonn.de/research/pdt Prolog Development Tool for Eclipse]
+  * [http://salaam.cs.buap.mx/EBOOKS/IA/PROLOG/Building_Expert_Systems_in_Prolog.pdf Building Expert Systems in prolog book]
+  * [http://www.amzi.com/products/prolog_customer_freeware.htm Building Expert Systems in prolog code]
