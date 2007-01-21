@@ -48,7 +48,7 @@ private static boolean inited = false;
 		}
 		
 	}
-	
+	/*
 	public void test_jpl_table_demo()
 	{
 		Query q1 = 
@@ -79,6 +79,37 @@ private static boolean inited = false;
 		        new Term[] {new Atom("jpl_midi_demo.pl")} 
 		    );
 		assertTrue(q1.hasSolution());
+		
+	}
+	*/
+	public void test_jpl_odbc()
+	{
+		Query q1 = 
+		    new Query( 
+		        "consult", 
+		        new Term[] {new Atom("odbc_test.pl")} 
+		    );
+		assertTrue(q1.hasSolution());
+
+		Query q2 = 
+		    new Query( 
+		        "open_db"
+		    );
+		assertTrue(q2.hasSolution());
+		
+		Variable X = new Variable("Domain");
+	
+		Term goal = new Compound
+		( "domain", 
+				new Term[]{X});
+		
+		Query q = new Query( goal );
+
+		while ( q.hasMoreSolutions() ) { 
+			Map binding = (Map) q.nextSolution(); 
+			System.out.println( binding.get("Domain"));
+		}
+		
 		
 	}
 	
