@@ -1,4 +1,3 @@
-import java.util.Hashtable;
 import java.util.Map;
 
 import jpl.Atom;
@@ -47,5 +46,40 @@ private static boolean inited = false;
 			Map binding = (Map) q.nextSolution(); 
 			System.out.println( binding.get("X") + " likes "+ binding.get("Y"));
 		}
+		
 	}
+	
+	public void test_jpl_table_demo()
+	{
+		Query q1 = 
+		    new Query( 
+		        "consult", 
+		        new Term[] {new Atom("jpl_table_demo.pl")} 
+		    );
+		assertTrue(q1.hasSolution());
+		
+	}
+
+	public void test_jpl_text_entry_demo()
+	{
+		Query q1 = 
+		    new Query( 
+		        "consult", 
+		        new Term[] {new Atom("jpl_text_entry_demo.pl")} 
+		    );
+		assertTrue(q1.hasSolution());
+		
+	}
+
+	public void test_jpl_midi_demo()
+	{
+		Query q1 = 
+		    new Query( 
+		        "consult", 
+		        new Term[] {new Atom("jpl_midi_demo.pl")} 
+		    );
+		assertTrue(q1.hasSolution());
+		
+	}
+	
 }
