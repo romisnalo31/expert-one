@@ -17,8 +17,3 @@ jpl_text_entry_demo :-
 	),
 	nl.
 
-
-% this directive runs the above demo
-
-:- jpl_text_entry_demo.
-

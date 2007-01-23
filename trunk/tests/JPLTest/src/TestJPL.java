@@ -6,12 +6,32 @@ import jpl.JPL;
 import jpl.Query;
 import jpl.Term;
 import jpl.Variable;
+import jpl.fli.Prolog;
 import junit.framework.TestCase;
 
 
 public class TestJPL extends TestCase {
 private static boolean inited = false;
-	
+
+	static class PT extends Thread
+	{
+		PT(String name){
+			super(name);
+		}
+		
+		@Override
+		public void run() {
+			Query q1 = 
+			    new Query( 
+			        "consult", 
+			        new Term[] {new Atom("jpl_text_entry_demo.pl")} 
+			    );
+			assertTrue(q1.hasSolution());
+			Query q2 = new Query("jpl_text_entry_demo");
+			assertTrue(q2.hasSolution());
+		}
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		if(!inited)
@@ -21,7 +41,7 @@ private static boolean inited = false;
 		}
 
 	}
-	
+	/*
 	public void testLikes()
 	{
 		Query q1 = 
@@ -48,7 +68,7 @@ private static boolean inited = false;
 		}
 		
 	}
-	/*
+
 	public void test_jpl_table_demo()
 	{
 		Query q1 = 
@@ -81,7 +101,7 @@ private static boolean inited = false;
 		assertTrue(q1.hasSolution());
 		
 	}
-	*/
+
 	public void test_jpl_odbc()
 	{
 		Query q1 = 
@@ -111,6 +131,21 @@ private static boolean inited = false;
 		}
 		
 		
+	}
+*/
+
+	public void test_simple_mt() throws InterruptedException
+	{
+		
+		PT pt1 = new PT("pt1");
+		PT pt2 = new PT("pt2");
+		pt1.start();
+		pt2.start();
+		
+//		pt1.join();
+//		pt2.join();
+		
+		Thread.sleep(100000);
 	}
 	
 }
