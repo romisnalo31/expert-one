@@ -8,6 +8,7 @@
         known/3.
 
 main :-
+    retractall(known(aleksey,_,_)),
     findall(Product, credit(aleksey, Product), Result),
     write('Credit products are:'), write(Result), nl.
     
