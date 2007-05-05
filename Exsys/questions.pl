@@ -34,27 +34,32 @@ doconfirm(Client,Question, Answer) :-
     write(Question),
     read(Answer).
 
-lives(aleksey, City) :-
-	ask(aleksey, 'Where do you live?', City).
 
-citizenship(aleksey, russian) :-
-    confirm(aleksey, 'Is you citizenship russian?').
+name(Client) :-
+    doask(Client, 'What is your name?', Client).
 
-income(aleksey, Income) :-
-    ask(aleksey,'What is your monthly income in rubles?', Income).
+lives(Client, City) :-
+	ask(Client, 'Where do you live?', City).
 
-period(aleksey, Months) :-
-    ask(aleksey,'What is the period of credit in months?', Months).
+citizenship(Client, russian) :-
+    confirm(Client, 'Is you citizenship russian?').
 
-age(aleksey, Years) :-
-    ask(aleksey,'What is your age?', Years).
+income(Client, Income) :-
+    ask(Client,'What is your monthly income in rubles?', Income).
 
-purchases(aleksey, house).
+period(Client, Months) :-
+    ask(Client,'What is the period of credit in months?', Months).
 
-price(house, Price) :-
-    ask(aleksey,'What is the price of house in rubles?', Price).
+age(Client, Years) :-
+    ask(Client,'What is your age?', Years).
 
-house_type(house, flat) :-
-    confirm(aleksey,'You want to buy a flat?').    
+purchases(Client, House) :-
+    ask(Client,'What you buy?', House).
+
+price(House, Price) :-
+    ask(House,'What is the price of house in rubles?', Price).
+
+house_type(House, flat) :-
+    confirm(House,'This is a flat?').    
 
    
