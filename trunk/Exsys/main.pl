@@ -17,4 +17,4 @@ restart :-
     retractall(known(Client,_,_)),
     write(Client), write(' cleared data').
 
-	
+    
