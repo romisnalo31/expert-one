@@ -4,6 +4,7 @@ sells(absolut, absolut_product1).
 rate(absolut_product1,11.5).
 
 ok_price(absolut_product1, Price) :-
+    known(Price),
     Price < 10000000,
     Price > 100000.
 

@@ -2,19 +2,46 @@
 :- include('goal.pl').
 :- include('bank/bank_rules.pl').
 :- include('all/all_rules.pl').
-:- include('questions.pl').
+:- include('account.pl').
+:- include('ui.pl').
 
 :- dynamic
-        known/3.
+        answer/3, question/2, confirmation/3.
 
 main :-
-    name(Client),
+    login(Client),
     findall(Product, credit(Client, Product), Result),
     write('Credit products are:'), write(Result), nl.
     
+
+ask :-
+	login(Client),
+	findall(Question, ask(Client, Question), Result),
+	write('Asked:'), write(Result), nl.
+
+confirm :-
+	login(Client),
+	findall(Question, confirm(Client, Question), Result),
+	write('Confirmed:'), write(Result), nl.
+
+
+confirm(Client, Question) :-
+    confirmation(Client, Question, Default),
+	not(answer(Client, Question, _)),
+	ask(Client, Question, Asnwer, Default),
+	asserta(answer(Client, Question, Asnwer)).
+
+ask(Client, Question) :-
+    question(Client, Question),
+	not(answer(Client, Question, _)),
+	ask(Client, Question, Asnwer),
+	asserta(answer(Client, Question, Asnwer)).
+    
 restart :-
-    name(Client),
-    retractall(known(Client,_,_)),
+    login(Client),
+    retractall(answer(Client,_,_)),
+    retractall(confirmation(Client,_,_)),
+    retractall(question(Client,_)),
     write(Client), write(' cleared data').
 
     

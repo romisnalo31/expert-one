@@ -10,4 +10,5 @@ require_document(absolut,trudovaja).
 
 ok_age(absolut,Age) :- 
     !,
+    known(Age),
  	between(25,47,Age).
