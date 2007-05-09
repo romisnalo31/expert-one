@@ -9,4 +9,4 @@ require_document(permbank,trudovaja).
 ok_age(permbank,Age) :- 
     !,
     known(Age),
- 	between(50,98,Age).
+ 	between(20,98,Age).

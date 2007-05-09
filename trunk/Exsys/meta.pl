@@ -1,22 +1,21 @@
 
 
-prove(true) :- !.
+prove(true, true) :- !.
 
-prove( (Goal1, Goal2) ) :- !,
-	prove(Goal1),
-	prove(Goal2).
-
+prove( (Goal1, Goal2), (Proof1, Proof2) ) :- !,
+	prove(Goal1, Proof1),
+	prove(Goal2, Proof2).
 	
-prove(Goal) :-
+prove(Goal, Goal <== Proof) :-
     traceable(Goal),
     !,
-    write('Call:'), write(Goal),
+%    write('Call:'), write(Goal),
     clause(Goal, Body),
-    write(' -> '), write(Body),nl,
-    prove(Body),
-    write('Exit:'), write(Goal), nl.
+%    write(' -> '), write(Body),nl,
+    prove(Body, Proof).
+%    write('Exit:'), write(Goal), nl.
     
-prove(Goal) :- 
+prove(Goal,_) :- 
 	call(Goal).
 
 traceable(credit(_,_)).
