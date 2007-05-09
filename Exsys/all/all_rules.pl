@@ -7,7 +7,8 @@ ok_age(_,Age) :-
  	between(18,67,Age).
 
 ok_citizenship(Client) :-
-    citizenship(Client, russian).
+    citizenship(Client, Country),
+    Country = russian.
     
 monthly_payment(Rate, Period, Price, Payment) :-
     known(Price),
