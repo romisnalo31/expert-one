@@ -1,4 +1,8 @@
 
+:- multifile 
+	sells/2, rate/2, ok_price/2, product_target/2, 
+	require_document/2, ok_age/2, serves/2, exceeds_minimum/2.
+
 credit(Client, Product) :-
     purchases(Client, House),
     sells(Bank, Product),
@@ -31,7 +35,7 @@ ok_type(House, Product) :-
     product_target(Product, Type),
     house_type(House, Type).
 
-ok_insurance(Bank, House) :-
+ok_insurance(_, _) :-
     true.
     
         
