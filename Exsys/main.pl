@@ -5,6 +5,7 @@
 :- include('all/all_rules.pl').
 :- include('account.pl').
 :- include('ui.pl').
+:- include('meta.pl').
 
 :- dynamic
         answer/3, question/2, confirmation/3.
@@ -45,4 +46,3 @@ restart :-
     retractall(question(Client,_)),
     write(Client), write(' cleared data').
 
-    
