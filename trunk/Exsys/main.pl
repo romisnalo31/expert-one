@@ -7,6 +7,7 @@
 :- include('account.pl').
 :- include('ui.pl').
 :- include('meta.pl').
+:- include('pretty.pl').
 
 :- dynamic
         answer/3, question/2, confirmation/3.
@@ -16,6 +17,14 @@ do :-
     repeat,
 	    propose(Client),
 	    ask(Client).
+
+prove :-
+    login(Client),
+ %   repeat,
+	    prove(credit(Client, Product), Explanation),
+	    write(Product),write(' recommended because:'),nl,
+	    printExlanation(Explanation).
+    	
 
 ask(Client) :-
     question(Client,Question),
