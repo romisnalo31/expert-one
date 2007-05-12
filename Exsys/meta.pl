@@ -1,4 +1,4 @@
-
+:- multifile explanation/2.
 
 prove(true, _) :- !.
 
@@ -24,10 +24,7 @@ tryExplain(Goal, Explanation) :-
     !.
  
 tryExplain(_,_).
-    
-explanation(ok_rate(Client, House, Product), Product+' Rate ! is suitable for you'+Client+' to buy '+House).
-explanation(ok_type(House, Product), House+' house type matches '+Product).
-
+   
 traceable(credit(_,_)).
 traceable(ok_client(_,_)).
 traceable(ok_house(_,_)).
@@ -35,6 +32,7 @@ traceable(ok_rate(_,_,_)).
 traceable(ok_type(_,_)).
 traceable(ok_insurance(_,_)).
 traceable(ok_price(_,_)).
+traceable(ok_age(_,_)).
 traceable(ok_citizenship(_)).
 traceable(purchases(_,_)).
 traceable(sells(_,_)).

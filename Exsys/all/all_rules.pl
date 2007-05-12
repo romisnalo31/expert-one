@@ -2,9 +2,14 @@
 
 require_document(_,passport).
 
-ok_age(_,Age) :- 
+ok_age(Bank,Age) :- 
     known(Age),
- 	between(18,67,Age).
+    minAge(Bank, Min),
+    maxAge(Bank, Max),
+    Age >= Min,
+    Age < Max.
+
+explanation(ok_age(_,_),'Age must be between min and max for most banks to accept').
 
 ok_citizenship(Client) :-
     citizenship(Client, Country),
