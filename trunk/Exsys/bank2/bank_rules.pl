@@ -6,7 +6,9 @@ serves(permbank, perm).
 require_document(permbank,ndfl2).
 require_document(permbank,trudovaja).
 
-ok_age(permbank,Age) :- 
-    !,
-    known(Age),
- 	between(20,98,Age).
+minAge(permbank,20).
+maxAge(permbank,98).
+
+ 	
+explanation(ok_age(permbank,_),'Perm bank accepts age in bounds 20 and 98 years').
+ 	

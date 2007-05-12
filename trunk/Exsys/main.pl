@@ -1,12 +1,13 @@
 :- op( 500, xfy, <== ).
 % main module for expert system
+:- include('meta.pl').
 :- include('goal.pl').
 :- include('bank/bank_rules.pl').
 :- include('bank2/bank_rules.pl').
 :- include('all/all_rules.pl').
 :- include('account.pl').
 :- include('ui.pl').
-:- include('meta.pl').
+
 :- include('pretty.pl').
 
 :- dynamic
