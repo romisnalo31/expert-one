@@ -1,22 +1,34 @@
 
 
-prove(true, true) :- !.
+prove(true, true, _) :- !.
 
-prove( (Goal1, Goal2), (Proof1, Proof2) ) :- !,
-	prove(Goal1, Proof1),
-	prove(Goal2, Proof2).
+prove( (Goal1, Goal2), (Proof1, Proof2), (Explanation1, Explanation2) ) :- !,
+%    nl,write('double: '), write(Goal1),write(' && '), write(Goal2),nl,
+	prove(Goal1, Proof1, Explanation1),
+	prove(Goal2, Proof2, Explanation2).
 	
-prove(Goal, Goal <== Proof) :-
+prove(Goal, Goal <== Proof, Explanation) :-
     traceable(Goal),
     !,
-%    write('Call:'), write(Goal),
+%   write('Call:'), write(Goal),
     clause(Goal, Body),
-%    write(' -> '), write(Body),nl,
-    prove(Body, Proof).
+    tryExplain(Goal, Explanation),
+%    nl,write(' -> '), write(Body),nl,
+    prove(Body, Proof, Explanation).
 %    write('Exit:'), write(Goal), nl.
-    
-prove(Goal,_) :- 
+  
+prove(Goal,_,_) :- 
 	call(Goal).
+
+tryExplain(Goal, Explanation) :-
+    explain(Goal, Explanation), 
+    !.
+ 
+tryExplain(_,_).
+    
+explain(ok_rate(Client, House, Product), Product+' Rate is suitable for you'+Client+' to buy '+House).
+explain(ok_type(House, Product), House+' house type matches '+Product).
+
 
 traceable(credit(_,_)).
 traceable(ok_client(_,_)).
@@ -25,9 +37,12 @@ traceable(ok_rate(_,_,_)).
 traceable(ok_type(_,_)).
 traceable(ok_insurance(_,_)).
 traceable(ok_price(_,_)).
+traceable(ok_citizenship(_)).
 traceable(purchases(_,_)).
 traceable(sells(_,_)).
 traceable(rate(_,_)).
+traceable(lives(_,_)).
+traceable(age(_,_)).
 traceable(product_target(_,_)).
 traceable(require_document(_,_)).
 traceable(serves(_,_)).
