@@ -1,34 +1,32 @@
 
 
-prove(true, true, _) :- !.
+prove(true, _) :- !.
 
-prove( (Goal1, Goal2), (Proof1, Proof2), (Explanation1, Explanation2) ) :- !,
-%    nl,write('double: '), write(Goal1),write(' && '), write(Goal2),nl,
-	prove(Goal1, Proof1, Explanation1),
-	prove(Goal2, Proof2, Explanation2).
+prove( (Goal1, Goal2), (Explanation1 , Explanation2) ) :- !,
+	prove(Goal1, Explanation1),
+	prove(Goal2, Explanation2).
 	
-prove(Goal, Goal <== Proof, Explanation) :-
+prove(Goal,  Explanation) :-
     traceable(Goal),
     !,
 %   write('Call:'), write(Goal),
     clause(Goal, Body),
     tryExplain(Goal, Explanation),
 %    nl,write(' -> '), write(Body),nl,
-    prove(Body, Proof, Explanation).
+    prove(Body,Explanation).
 %    write('Exit:'), write(Goal), nl.
   
-prove(Goal,_,_) :- 
+prove(Goal,_) :- 
 	call(Goal).
 
 tryExplain(Goal, Explanation) :-
-    explain(Goal, Explanation), 
+    explanation(Goal, Explanation), 
     !.
  
 tryExplain(_,_).
     
-explain(ok_rate(Client, House, Product), Product+' Rate is suitable for you'+Client+' to buy '+House).
-explain(ok_type(House, Product), House+' house type matches '+Product).
-
+explanation(ok_rate(Client, House, Product), Product+' Rate ! is suitable for you'+Client+' to buy '+House).
+explanation(ok_type(House, Product), House+' house type matches '+Product).
 
 traceable(credit(_,_)).
 traceable(ok_client(_,_)).
