@@ -21,11 +21,11 @@ do :-
 
 prove :-
     login(Client),
- %   repeat,
 	    prove(credit(Client, Product), Explanation),
 	    write(Product),write(' recommended because:'),nl,
 	    printExlanation(Explanation).
     	
+
 
 ask(Client) :-
     question(Client,Question),
