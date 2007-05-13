@@ -25,7 +25,10 @@ prove :-
 	    write(Product),write(' recommended because:'),nl,
 	    printExlanation(Explanation).
     	
-
+whynot(Client, Product) :-
+    	prove_not(credit(Client, Product), Explanation),
+	    write(Product),write(' not recommended because:'),nl,
+	    printExlanation(Explanation).
 
 ask(Client) :-
     question(Client,Question),

@@ -1,24 +1,27 @@
 :- multifile explanation/2.
 
-whynot(Goal, Explanation) :-
-	clause(Goal, Body),
-	prove_not(Body, Explanation).
-
-whynot(_,_).
-
-prove_not(true,_).
+prove_not(true,_) :-
+	!.
 
 prove_not( (Goal1, Goal2), (Explanation1 , Explanation2) ) :-
 	prove_not(Goal1, Explanation1),
-	prove_not(Goal2, Explanation2).
+	prove_not(Goal2, Explanation2), 
+	!.
 
 prove_not(Goal,_) :- 
 	prove(Goal, _), 
 	!.
 	
 prove_not(Goal, Explanation) :- 
-    write('fails:'),write(Goal),nl,
-	tryExplain(Goal, Explanation).
+	explanation(Goal, Explanation), 
+	!.
+	
+prove_not(Goal, Explanation) :-
+    traceable(Goal),
+    clause(Goal, Body),
+%    write('fail:'),write(Goal),write('->'),write(Body),nl,
+    prove_not(Body, Explanation).
+    
 
 prove(true, _) :- !.
 
