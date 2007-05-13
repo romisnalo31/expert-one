@@ -3,6 +3,10 @@
 
 serves(permbank, perm).
 
+explanation(serves(permbank,perm),'Perm bank serves Perm').
+explanation(serves(permbank,_),'Perm bank serves only Perm').
+
+
 require_document(permbank,ndfl2).
 require_document(permbank,trudovaja).
 
