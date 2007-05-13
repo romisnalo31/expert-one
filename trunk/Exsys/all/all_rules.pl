@@ -25,3 +25,13 @@ exceeds_minimum(Income, Payment) :-
     known(Income),
     known(Payment),
     Income/3 > Payment.
+    
+explanation(exceeds_minimum(_, _), 'Payment must not exceed 1/3 from sallary after taxes').    
+
+explanation(serves(Bank, City),Explanation) :-
+    serves(Bank, City), !,
+	swritef(Explanation, 'Bank %w works in %w',[Bank, City]).
+	
+explanation(serves(Bank, City),Explanation) :-
+	swritef(Explanation, 'Bank %w does not works in %w',[Bank, City]).
+	

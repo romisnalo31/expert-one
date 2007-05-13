@@ -3,11 +3,10 @@
 :- include('bank/bank_product2.pl').
 
 serves(absolut, moscow).
-explanation(serves(absolut,moscow),'Absolut bank serves Moscow').
+explanation(serves(absolut,moscow),'Absolut bank loves Moscow').
 
 serves(absolut, peter).
 explanation(serves(absolut,peter),'Absolut bank serves Peter').
-
 
 require_document(absolut,ndfl2).
 require_document(absolut,trudovaja).
