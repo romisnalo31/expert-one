@@ -21,7 +21,9 @@ prove_not(Goal, Explanation) :-
     clause(Goal, Body),
 %    write('fail:'),write(Goal),write('->'),write(Body),nl,
     prove_not(Body, Explanation).
-    
+
+prove_not(Goal, _) :-
+	traceable(Goal).  
 
 prove(true, _) :- !.
 
