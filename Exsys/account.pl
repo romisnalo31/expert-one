@@ -13,7 +13,7 @@ query(Client, Question, _) :-
     !.
 
 query(Client, Question, _) :-
-    asserta(question(Client, Question,'A Trace')).
+    asserta(question(Client, Question,'Why we ask the question? Must be here..')).
 
 confirm(Client, Question, _, Answer) :-
     answer(Client, Question, Answer),
