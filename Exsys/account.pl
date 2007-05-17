@@ -9,11 +9,11 @@ query(Client, Question, Answer) :-
     !.
 
 query(Client, Question, _) :-
-    question(Client, Question),
+    question(Client, Question,_),
     !.
 
 query(Client, Question, _) :-
-    asserta(question(Client, Question)).
+    asserta(question(Client, Question,'A Trace')).
 
 confirm(Client, Question, _, Answer) :-
     answer(Client, Question, Answer),

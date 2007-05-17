@@ -4,12 +4,13 @@ login(Client) :-
     read(Client).
 
 
-ask(Client, Question, Answer) :-
-    write(Client),
-    write(' ,'),
-    write(Question),
+doAsk(Client, Question, Answer, Trace) :-
+    write(Client),write(' ,we ask this question because:'), write(Trace),nl,
+    write(Question),nl,
     read(Answer).
     
-ask(Client, Question, Answer, Default) :-
-    MyQuestion = Question + Default,
-    ask(Client, MyQuestion, Answer).
+doAskWithDefault(Client, Question, Answer, Default) :-
+    write(Client),
+    write(' ,'),
+    write(Question),write(' ['),write(Default), write('] '),nl,
+    read(Answer).

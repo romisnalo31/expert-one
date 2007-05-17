@@ -11,7 +11,7 @@
 :- include('pretty.pl').
 
 :- dynamic
-        answer/3, question/2, confirmation/3.
+        answer/3, question/3, confirmation/3.
 
 do :-
     login(Client),
@@ -31,7 +31,7 @@ whynot(Client, Product) :-
 	    printExlanation(Explanation).
 
 ask(Client) :-
-    question(Client,Question),
+    question(Client,Question,_),
 	ask(Client, Question),
 	!,
 	fail.
@@ -76,19 +76,19 @@ confirm :-
 confirm(Client, Question) :-
     confirmation(Client, Question, Default),
 	not(answer(Client, Question, _)),
-	ask(Client, Question, Asnwer, Default),
+	doAskWithDefault(Client, Question, Asnwer, Default),
 	asserta(answer(Client, Question, Asnwer)).
 
 ask(Client, Question) :-
-    question(Client, Question),
+    question(Client, Question, Trace),
 	not(answer(Client, Question, _)),
-	ask(Client, Question, Asnwer),
+	doAsk(Client, Question, Asnwer, Trace),
 	asserta(answer(Client, Question, Asnwer)).
     
 restart :-
     login(Client),
     retractall(answer(Client,_,_)),
     retractall(confirmation(Client,_,_)),
-    retractall(question(Client,_)),
+    retractall(question(Client,_,_)),
     write(Client), write(' cleared data').
 
