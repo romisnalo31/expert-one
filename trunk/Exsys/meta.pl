@@ -15,21 +15,26 @@ solve(true, _) :- !.
 solve( (Goal1, Goal2), (Explanation1 , Explanation2) ) :- !,
 	solve(Goal1, Explanation1),
 	solve(Goal2, Explanation2).
+
+solve(query(Client, Question, Answer),  Explanation) :- !,
+    write('Asking '),write(Question),write(' because '),write(Explanation),nl,
+    query(Client, Question, Answer).
 	
 solve(Goal,  Explanation) :-
     traceable(Goal),
     !,
     clause(Goal, Body),
     explainWhy(Goal, Explanation),
-    solve(Body,Explanation).
+    solve(Body, Explanation).
   
 solve(Goal,_) :- 
 	call(Goal).
 	
 explainWhy(Goal, Explanation) :-
-    explanation(Goal, Explanation), 
-    !,
-    write(Goal),write(' ? ->'), write(Explanation),nl.
+    explanation(Goal, Explanation).
+%    , 
+%    !,
+%    write(Goal),write(' ? ->'), write(Explanation),nl.
  
 explainWhy(_,_).
 
