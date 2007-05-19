@@ -36,7 +36,7 @@ citizenship(Client, Country) :-
     confirm(Client, 'Is you citizenship russian?', russian, Country).
     
 lives(Client, City) :-
-	confirm(Client, 'Where do you live?', moscow, City).
+	query(Client, 'Where do you live?',City).
 
 period(Client, Months) :-
     query(Client,'What is the period of credit in months?', Months).

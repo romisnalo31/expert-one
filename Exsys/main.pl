@@ -36,6 +36,7 @@ ask(Client) :-
 	!,
 	fail.
 
+
 ask(Client) :-
     confirmation(Client,Question,_),
 	confirm(Client, Question),
@@ -80,6 +81,12 @@ confirm(Client, Question) :-
 	asserta(answer(Client, Question, Asnwer)).
 
 ask(Client, Question) :-
+    question(Client, Question),
+	not(answer(Client, Question, _)),
+	repeat,
+		not(haveToAsk(Client)).
+
+haveToAsk(Client) :-		
     question(Client, Question),
 	not(answer(Client, Question, _)),
 	ask(Client, Question, Asnwer),

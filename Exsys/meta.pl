@@ -1,5 +1,39 @@
 :- multifile explanation/2.
 
+
+%
+% solve(-Goal)
+% Find the solution for Goal, 
+% tracing  rules execution for "whyask" questions
+% 
+
+solve(Goal) :-
+    solve(Goal, _).
+    
+solve(true, _) :- !.
+
+solve( (Goal1, Goal2), (Explanation1 , Explanation2) ) :- !,
+	solve(Goal1, Explanation1),
+	solve(Goal2, Explanation2).
+	
+solve(Goal,  Explanation) :-
+    traceable(Goal),
+    !,
+    clause(Goal, Body),
+    tryExplain(Goal, Explanation),
+%    write(Goal),write(' ? ->'), write(Explanation),nl,
+%    nl,write(' -> '), write(Body),nl,
+    solve(Body,Explanation).
+%    write('Exit:'), write(Goal), nl.
+  
+solve(Goal,_) :- 
+	call(Goal).
+
+%
+% prove_not(+Goal, -Explanation)
+% Explanation is why Goal is not unified
+%
+
 prove_not(true,_) :-
 	!.
 
@@ -25,6 +59,10 @@ prove_not(Goal, Explanation) :-
 prove_not(Goal, _) :-
 	traceable(Goal).  
 
+%
+% prove(+Goal, -Explanation)
+% Explanation is why Goal is unified
+%
 prove(true, _) :- !.
 
 prove( (Goal1, Goal2), (Explanation1 , Explanation2) ) :- !,
