@@ -48,9 +48,9 @@ ask(_) :-
     true.	
     
 propose(Client) :-
-    credit(Client, _),
+    solve(credit(Client, _)),
     !,
-    findall(Product, credit(Client, Product), Result),
+    findall(Product, solve(credit(Client, Product)), Result),
     nl,write('Credit products are:'), write(Result), nl,nl.
     
 propose(_) :-

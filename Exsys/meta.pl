@@ -20,14 +20,19 @@ solve(Goal,  Explanation) :-
     traceable(Goal),
     !,
     clause(Goal, Body),
-    tryExplain(Goal, Explanation),
-%    write(Goal),write(' ? ->'), write(Explanation),nl,
-%    nl,write(' -> '), write(Body),nl,
+    explainWhy(Goal, Explanation),
     solve(Body,Explanation).
-%    write('Exit:'), write(Goal), nl.
   
 solve(Goal,_) :- 
 	call(Goal).
+	
+explainWhy(Goal, Explanation) :-
+    explanation(Goal, Explanation), 
+    !,
+    write(Goal),write(' ? ->'), write(Explanation),nl.
+ 
+explainWhy(_,_).
+
 
 %
 % prove_not(+Goal, -Explanation)
@@ -83,8 +88,7 @@ prove(Goal,_) :-
 	call(Goal).
 
 tryExplain(Goal, Explanation) :-
-    explanation(Goal, Explanation), 
-    !.
+    explanation(Goal, Explanation).
  
 tryExplain(_,_).
    
@@ -102,9 +106,11 @@ traceable(sells(_,_)).
 traceable(rate(_,_)).
 traceable(lives(_,_)).
 traceable(age(_,_)).
+traceable(known(_)).
 traceable(product_target(_,_)).
 traceable(require_document(_,_)).
 traceable(serves(_,_)).
+traceable(monthly_payment(_,_)).
 traceable(exceeds_minimum(_,_)).
 
 
