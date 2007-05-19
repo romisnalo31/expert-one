@@ -12,11 +12,13 @@ solve(Goal) :-
     
 solve(true, _) :- !.
 
-solve((Goal, Rest), Hist) :-
+solve((Goal, Rest), Hist) :- !,
 	solve(Goal, (Goal, Rest)),
 	solve(Rest, Hist).
 
-solve(query(Client, Question, Answer),  Explanation) :- !,
+solve(query(Client, Question, Answer),  Explanation) :- 
+	not(answer(Client, Question,_)),
+	!,
     write('Asking '),write(Question),write(' because '),write(Explanation),nl,
     query(Client, Question, Answer).
 
@@ -98,11 +100,14 @@ traceable(ok_price(_,_)).
 traceable(ok_age(_,_)).
 traceable(ok_citizenship(_)).
 traceable(purchases(_,_)).
+traceable(price(_,_)).
 traceable(sells(_,_)).
 traceable(rate(_,_)).
 traceable(lives(_,_)).
 traceable(age(_,_)).
 traceable(known(_)).
+traceable(income(_,_)).
+traceable(period(_,_)).
 traceable(product_target(_,_)).
 traceable(require_document(_,_)).
 traceable(serves(_,_)).
