@@ -1,6 +1,7 @@
 :- op( 500, xfy, <== ).
 % main module for expert system
 :- include('meta.pl').
+:- include('why.pl').
 :- include('goal.pl').
 :- include('bank/bank_rules.pl').
 :- include('bank2/bank_rules.pl').
