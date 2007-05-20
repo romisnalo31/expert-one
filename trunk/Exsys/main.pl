@@ -12,7 +12,7 @@
 :- include('pretty.pl').
 
 :- dynamic
-        answer/3, question/2, confirmation/3.
+        answer/3, question/2, confirmation/3, whyask/3.
 
 do :-
     login(Client),

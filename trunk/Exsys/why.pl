@@ -1,7 +1,12 @@
 
-whyquery(_Client, Question, Hist) :-
+whyquery(Client, Question, Hist) :-
     explainWhy(Hist, Explanation),
-    write('Asking '),write(Question),write(' because '),write(Explanation),nl.
+	whyask(Client, Question, Explanation),
+	!.
+	
+whyquery(Client, Question, Hist) :-
+    explainWhy(Hist, Explanation),
+    asserta(whyask(Client, Question, Explanation)).
     
 
 explainWhy((Hist1, Hist2), (_, _)) :- 
