@@ -69,8 +69,7 @@ explainWhy(Goal, Explanation) :-
     explanation(Goal, Explanation),
     !.
 
-explainWhy(Goal, Explanation) :-
-	Explanation = Goal.
+explainWhy(Goal, Goal).
 
 %
 % prove_not(+Goal, -Explanation)
@@ -86,7 +85,8 @@ prove_not( (Goal1, Goal2), (Explanation1 , Explanation2) ) :-
 	!.
 
 prove_not(Goal,_) :- 
-	prove(Goal, _), 
+    traceable(Goal),
+    prove(Goal, _), 
 	!.
 	
 prove_not(Goal, Explanation) :- 
