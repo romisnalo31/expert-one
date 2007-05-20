@@ -22,8 +22,7 @@ solve(Goal, Hist) :-
 solv(query(Client, Question, Answer),  Hist) :- 
 	not(answer(Client, Question,_)),
 	!,
-	explainWhy(Hist, Explanation),
-    write('Asking '),write(Question),write(' because '),write(Explanation),nl,
+    whyquery(Client, Question, Hist),
     query(Client, Question, Answer).
 
 solv(Goal, (Goal,Hist)) :-
@@ -41,35 +40,6 @@ solv(Goal, Hist) :-
 solv(Goal,_) :- 
 	call(Goal).
 
-
-explainWhy((Hist1, Hist2), (_, _)) :- 
-    var(Hist1),
-    var(Hist2),
-    !.
-
-explainWhy((Hist1, Hist2), Expl2) :- 
-    var(Hist1),
-    !,
-    explainWhy(Hist2, Expl2).
-
-explainWhy((Hist1, Hist2), Expl1) :- 
-    var(Hist2),
-    !,
-    explainWhy(Hist1, Expl1).
-
-explainWhy((Hist1, Hist2), (Expl1, Expl2)) :- !,
-	explainWhy(Hist1, Expl1),
-	explainWhy(Hist2, Expl2).
-
-explainWhy(Goal, Explanation) :-
-    whyask(Goal, Explanation),
-    !.
-	
-explainWhy(Goal, Explanation) :-
-    explanation(Goal, Explanation),
-    !.
-
-explainWhy(Goal, Goal).
 
 %
 % prove_not(+Goal, -Explanation)
