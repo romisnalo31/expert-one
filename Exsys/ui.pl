@@ -8,6 +8,8 @@ ask(Client, Question, Answer) :-
     write(Client),
     write(' ,'),
     write(Question),
+    findall(Why,whyask(Client,Question,Why),Reasons),
+    write(Reasons),
     read(Answer).
     
 ask(Client, Question, Answer, Default) :-
