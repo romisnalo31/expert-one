@@ -11,6 +11,10 @@ ok_age(Bank,Age) :-
 
 explanation(ok_age(_,_),'Age must be between min and max for most banks to accept').
 
+whyask(age(_,_),'Age is important for qualification for credit').
+whyask(ok_client(_,_),'Bank must pre-qualify person').
+whyask(credit(_,_),'You apply for credit').
+
 ok_citizenship(Client) :-
     citizenship(Client, Country),
     Country = russian.
