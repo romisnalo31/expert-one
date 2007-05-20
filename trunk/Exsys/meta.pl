@@ -13,24 +13,64 @@ solve(Goal) :-
 solve(true, _) :- !.
 
 solve((Goal, Rest), Hist) :- !,
-	solve(Goal, (Goal, Rest)),
+	solv(Goal, (Goal,Hist)),
 	solve(Rest, Hist).
 
-solve(query(Client, Question, Answer),  Explanation) :- 
+solve(Goal, Hist) :-
+    solv(Goal, Hist).
+
+solv(query(Client, Question, Answer),  Hist) :- 
 	not(answer(Client, Question,_)),
 	!,
+	explainWhy(Hist, Explanation),
     write('Asking '),write(Question),write(' because '),write(Explanation),nl,
     query(Client, Question, Answer).
 
-solve(Goal, Hist) :-
+solv(Goal, (Goal,Hist)) :-
     traceable(Goal),
     !,
 	clause(Goal, List),
-	solve(List, [Goal|Hist]).    
+	solve(List, (Goal,Hist)).
 
-solve(Goal,_) :- 
+solv(Goal, Hist) :-
+    traceable(Goal),
+    !,
+	clause(Goal, List),
+	solve(List, (Goal,Hist)).
+
+solv(Goal,_) :- 
 	call(Goal).
 
+
+explainWhy((Hist1, Hist2), (_, _)) :- 
+    var(Hist1),
+    var(Hist2),
+    !.
+
+explainWhy((Hist1, Hist2), Expl2) :- 
+    var(Hist1),
+    !,
+    explainWhy(Hist2, Expl2).
+
+explainWhy((Hist1, Hist2), Expl1) :- 
+    var(Hist2),
+    !,
+    explainWhy(Hist1, Expl1).
+
+explainWhy((Hist1, Hist2), (Expl1, Expl2)) :- !,
+	explainWhy(Hist1, Expl1),
+	explainWhy(Hist2, Expl2).
+
+explainWhy(Goal, Explanation) :-
+    whyask(Goal, Explanation),
+    !.
+	
+explainWhy(Goal, Explanation) :-
+    explanation(Goal, Explanation),
+    !.
+
+explainWhy(Goal, Explanation) :-
+	Explanation = Goal.
 
 %
 % prove_not(+Goal, -Explanation)
@@ -90,6 +130,8 @@ tryExplain(Goal, Explanation) :-
  
 tryExplain(_,_).
    
+
+traceable(ok_specifics(_,_)).
 traceable(credit(_,_)).
 traceable(ok_client(_,_)).
 traceable(ok_house(_,_)).
